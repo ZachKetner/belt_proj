@@ -1,0 +1,25 @@
+* {
+    font-family: 'arial', sans-serif;
+}
+
+#wrapper {
+    margin: auto;
+    padding-top: 15px;
+}
+#header {
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+#register {
+    display: flex;
+    justify-content: space-between;
+}
+#register > section {
+    width: 50%;
+    margin: 0 2em;
+}
+ul.messages {
+    list-style: none;
+    text-align: center;
+}

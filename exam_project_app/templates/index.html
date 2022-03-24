@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="register">
+            <section>
+                <h5 class="text-left">Welcome {{user.fName}} {{user.lName}}!</h5>
+                <h5 class="text-center pt-4">Quotes</h5>
+                {% for quote in All_quotes %}
+                    <div class="container border border-dark pt-2">
+                    <p>{{quote.author}}: "{{quote.description}}"</p>
+                    <p>Posted by <a href="/quotes/user/{{quote.quoter.id}}">{{quote.quoter.fName}} {{quote.quoter.lName}}</a></p>
+                    <div class="row">
+                        <p class="ml-3 mr-5">{{quote.quote_likes.count}} people like this quote.</p>
+                        <a href="/quotes/like/{{quote.id}}" class="btn btn-primary float-right ml-5 mb-2" role="button">Like!</a>
+                    </div>
+                    {% if user.id == quote.quoter.id %}
+                        <a href="/quotes/delete/{{quote.id}}">Delete</a>
+                    {% endif %}
+                    </div>
+                {% endfor %}
+                    
+            </section>
+            <section>
+                <a href="/quotes/myaccount/{{user.id}}" class="mr-3">Edit My Account</a>
+                <a href="/log_out" class="btn btn-primary" role="button">Log Out</a>
+                <div class="container pt-4">
+                    <h5 class="text-center">Add a Quote!</h5>
+                    <form action="/quotes/create" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input type="text" name="author" id="author" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Quote</label>
+                            <textarea class="form-control" rows="5" name="description" id="description"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for eachmessage in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ eachmessage }}</li>
+                    {% endfor %}    
+                </ul>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</body>
+</html>
