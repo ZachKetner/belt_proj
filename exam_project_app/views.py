@@ -3,6 +3,7 @@ from .models import *
 from login_and_reg_app.models import *
 import bcrypt
 from django.contrib import messages
+from .forms import QuoteForm
 
 def index(request):
     if 'user' not in request.session:
@@ -13,7 +14,8 @@ def index(request):
         'All_users': User.objects.all(),
         'user': selectedUser,
     }
-    return render(request, 'index.html', context)
+    form = QuoteForm()
+    return render(request, 'index.html', context, {"form":form})
 
 def create(request):
     if request.method =='POST':

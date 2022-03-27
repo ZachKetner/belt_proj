@@ -41,14 +41,7 @@
                     <h5 class="text-center">Add a Quote!</h5>
                     <form action="/quotes/create" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <label for="author">Author</label>
-                            <input type="text" name="author" id="author" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Quote</label>
-                            <textarea class="form-control" rows="5" name="description" id="description"></textarea>
-                        </div>
+                        {{ form }}
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
