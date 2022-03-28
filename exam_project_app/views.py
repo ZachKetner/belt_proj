@@ -15,7 +15,7 @@ def index(request):
         'user': selectedUser,
     }
     form = QuoteForm()
-    return render(request, 'index.html', context, {"form":form})
+    return render(request, 'index.html', context, {'form':form})
 
 def create(request):
     if request.method =='POST':

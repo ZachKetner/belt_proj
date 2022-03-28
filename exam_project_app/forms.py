@@ -1,8 +1,8 @@
 from socket import fromshare
-from django import forms
+from django.forms import ModelForm
 from .models import Quotes
 
-class QuoteForm(forms.ModelForm):
+class QuoteForm(ModelForm):
     class Meta:
         model = Quotes
         fields = ('author', 'description')
