@@ -8,14 +8,16 @@ from .forms import QuoteForm
 def index(request):
     if 'user' not in request.session:
         return redirect('/')
-    selectedUser = User.objects.get(id=request.session['user'])
-    context = {
-        'All_quotes': Quotes.objects.all(),
-        'All_users': User.objects.all(),
-        'user': selectedUser,
-    }
-    form = QuoteForm()
-    return render(request, 'index.html', context, {'form':form})
+    else:
+        selectedUser = User.objects.get(id=request.session['user']) 
+        form = QuoteForm()
+        context = {
+            'All_quotes': Quotes.objects.all(),
+            'All_users': User.objects.all(),
+            'user': selectedUser,
+            'form':form
+        }
+    return render(request, 'index.html', context)
 
 def create(request):
     if request.method =='POST':

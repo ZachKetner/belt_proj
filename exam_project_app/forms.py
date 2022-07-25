@@ -5,5 +5,5 @@ from .models import Quotes
 class QuoteForm(ModelForm):
     class Meta:
         model = Quotes
-        fields = ('author', 'description')
+        fields = ['author', 'description']
     

@@ -41,7 +41,7 @@
                     <h5 class="text-center">Add a Quote!</h5>
                     <form action="/quotes/create" method="post">
                         {% csrf_token %}
-                        {{ form }}
+                        {{ form|crispy }}
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
