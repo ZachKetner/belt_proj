@@ -3,16 +3,20 @@ from .models import *
 from login_and_reg_app.models import *
 import bcrypt
 from django.contrib import messages
+from .forms import QuoteForm
 
 def index(request):
     if 'user' not in request.session:
         return redirect('/')
-    selectedUser = User.objects.get(id=request.session['user'])
-    context = {
-        'All_quotes': Quotes.objects.all(),
-        'All_users': User.objects.all(),
-        'user': selectedUser,
-    }
+    else:
+        selectedUser = User.objects.get(id=request.session['user']) 
+        form = QuoteForm()
+        context = {
+            'All_quotes': Quotes.objects.all(),
+            'All_users': User.objects.all(),
+            'user': selectedUser,
+            'form':form
+        }
     return render(request, 'index.html', context)
 
 def create(request):
